@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <style>
+            body {
+                font-size: 13;
+                font-family: Microsoft YaHei UI, sans-serif;
+            }
+            .conclusion{
+                color: red;
+                {% if conclusion == "不通过" %}
+                color: red;
+                {% else %}
+                color: green;
+                {% endif %}
+            }
+        </style>
+    </head>
+    <body>
+        <p>Hi All，</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;你好，{{ project_name }} 第{{ test_round }}轮 需求测试完成，本轮新增问题{{ new_issues }}个，关闭问题{{ closed_issues }}个，重新打开问题{{ reopened_issues }}个。</p>
+        <p>测试结论：<span class="conclusion">{{ conclusion }}</span></p>
+		<br/>
+        <p>缺陷清单:</p>
+        <ul>
+            <li style="margin-top: -10px; margin-bottom: -10px;">{{ defect_list }}</li>
+        </ul>
+        <p>测试范围:</p>
+        <ul>
+            <li style="margin-top: -10px; margin-bottom: -10px;">{{ test_content }}</li>
+        </ul>
+        <p>测试环境:</p>
+        <ul>
+            <li style="margin-top: -10px; margin-bottom: -10px;">{{ test_env }}</li>
+        </ul>
+        <p>系统：</p>
+        <ul>
+            <li style="margin-top: -10px; margin-bottom: -10px;">{{ system }}</li>
+        </ul>
+        <p>测试设备：</p>
+        <ul>
+            <li style="margin-top: -10px; margin-bottom: -10px;">{{ test_device }}</li>
+        </ul>
+		<br/>
+        <p>测试用例覆盖：</p>
+        <p>用例执行：{{ test_case_count }}</p>
+    </body>
+</html>
