@@ -162,11 +162,6 @@ class Common:
         # 获取自动划测试用例数量
         return self.ui.spinBox_7.value()
 
-    def get_case_status_rediobtn(self):
-        # 获取是否包含自动化
-        current_choice = self.ui.buttonGroup.checkedButton() 
-        return current_choice.text()
-
     def get_system_rediobtn(self):
         # 获取选择的系统
         android_sys = self.ui.checkBox.isChecked()  # 获取安卓等选择状态 bool型
@@ -228,7 +223,6 @@ class Stats:
         self.ui.listWidget.itemClicked.connect(self.on_item_clicked)  # 列表1点击事件
         self.ui.listWidget_2.itemClicked.connect(self.on_item_clicked)  # 列表2点击事件
         self.ui.pushButton_3.clicked.connect(self.preview)   # 预览按钮点击事件
-        self.ui.buttonGroup.buttonClicked.connect(self.Common.get_case_status_rediobtn)  # 用例选择事件
         self.ui.buttonGroup_2.buttonClicked.connect(self.Common.get_system_rediobtn)  # 系统选择事件
         self.env = Environment(loader=FileSystemLoader('.'))   # 实例化邮件模板相关内容
         self.refresh_btn()  # 启动则获取一次邮件
@@ -291,17 +285,10 @@ class Stats:
         test_env = self.Common.get_test_env_cBox()
         system = self.Common.get_system_rediobtn()
         test_device = self.Common.get_test_device_edit()
-        current_case_stuts = self.Common.get_case_status_rediobtn()
         test_case_count = self.Common.get_test_case_count_spinBox()
-        template = self.env.get_template('template.html')
-        auto_test_case_count = 0
-        if current_case_stuts == "有自动化":
-            auto_test_case_count = self.Common.get_auto_test_case_count_spinBox()
-            template = self.env.get_template('template_auto.html')
-
-        html = template.render(#recipient_name=recipient_name,
-                               #sender_name=sender_name,
-                               project_name=project_name,
+        template = self.env.get_template('template1.html')
+        auto_test_case_count = self.Common.get_auto_test_case_count_spinBox()
+        html = template.render(project_name=project_name,
                                test_round=test_round,
                                new_issues=new_issues,
                                closed_issues=closed_issues,
