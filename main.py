@@ -166,8 +166,8 @@ class Common:
         # 获取选择的系统
         android_sys = self.ui.checkBox.isChecked()  # 获取安卓等选择状态 bool型
         ios_sys = self.ui.checkBox_2.isChecked()
-        hongmeng_sys = self.ui.checkBox_3.isChecked()
-        win_sys = self.ui.checkBox_4.isChecked()
+        win_sys = self.ui.checkBox_3.isChecked()
+        hongmeng_sys = self.ui.checkBox_4.isChecked()
         mac_sys = self.ui.checkBox_5.isChecked()
         temp_dic = {"安卓":android_sys,"IOS":ios_sys,"鸿蒙":hongmeng_sys,"Windows":win_sys,"Mac":mac_sys}  # 创建字典
         temp_list = []
@@ -265,7 +265,7 @@ class Stats:
     def on_item_clicked(self,item):
         global clicked_message
         print("你点击了：" + item.text())
-        self.Common.set_title(item.text())  # 设置标题
+        self.Common.set_title("【测试结果】" + str(item.text()))  # 设置【测试结果】+标题
         self.Common.get_clicked_message(item)
         cc = self.Common.get_cc_info(clicked_message)   # 获取当前点击邮件的抄送人
         sender = self.Common.get_sender_info(clicked_message)   # 获取当前点击邮件的抄送人
