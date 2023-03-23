@@ -22,11 +22,27 @@
 		<br/>
         <p>缺陷清单:</p>
         <ul>
-            <li style="margin-top: -10px; margin-bottom: -10px;">{{ defect_list }}</li>
+		{% if defect_list is defined %}
+		{% if "," in defect_list %}
+			{% for list in defect_list.split(",") %}
+            <li style="margin-top: -10px; margin-bottom: -10px;">{{ list }}</li>
+			{% endfor %}
+		{% else %}
+			 <li style="margin-top: -10px; margin-bottom: -10px;">{{ defect_list }}</li>
+		{% endif %}
+		{% endif %}
         </ul>
         <p>测试范围:</p>
         <ul>
-            <li style="margin-top: -10px; margin-bottom: -10px;">{{ test_content }}</li>
+		{% if test_content is defined %}
+		{% if "," in test_content %}
+			{% for content in test_content.split(",") %}
+			<li style="margin-top: -10px; margin-bottom: -10px;">{{ content }}</li>
+			{% endfor %}
+		{% else %}
+			<li style="margin-top: -10px; margin-bottom: -10px;">{{ test_content }}</li>
+		{% endif %}
+		{% endif %}
         </ul>
         <p>测试环境:</p>
         <ul>
