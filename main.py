@@ -110,6 +110,10 @@ class Common:
         # 获取发件人信息
         return self.Outlook.get_email_info(message,"SenderName")
 
+    def get_senton_info(self,message):
+        # 获取发件事件
+        return self.Outlook.get_email_info(message, "SentOn")
+
     def get_email_title_edit(self):
         # 获取邮件标题编辑框中的内容
         return self.ui.lineEdit.text()
@@ -202,8 +206,9 @@ class Common:
         reply_html = html
         newline = "<br><br\>"  # 换行符号
         line = "<hr>"  # outlook自带的分割线
+        senton = self.get_senton_info(clicked_message)
 
-        reply.HTMLBody = f"{reply_html}{newline}{line}{message.HTMLBody}"
+        reply.HTMLBody = f"{reply_html}{newline}{line}{senton}{message.HTMLBody}"
         reply.Display()  # 用于在屏幕上展示邮件
 
 class Stats:
