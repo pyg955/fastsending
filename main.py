@@ -2,6 +2,18 @@ from PySide2.QtWidgets import QApplication, QMainWindow, QTabWidget, QListWidget
 from PySide2.QtUiTools import QUiLoader
 import win32com.client
 from jinja2 import Environment, FileSystemLoader
+import win32timezone
+import logging
+
+
+# 设置日志格式
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+# 创建一个FileHandler来输出到文件
+file_handler = logging.FileHandler('error.log')
+file_handler.setLevel(logging.DEBUG)
+file_handler.setFormatter(formatter)
+logging.getLogger('').addHandler(file_handler)
 
 clicked_messages = 0
 clicked_message = 0
@@ -309,6 +321,7 @@ class Stats:
         try:
             self.Common.reply_email(clicked_message,html)  # 回复邮件
         except:
+            logging.exception("发生错误！")
             QMessageBox.critical(self.ui.error_window,
                 '异常情况',
                 "请先选择邮件！"
